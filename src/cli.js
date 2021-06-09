@@ -2,20 +2,10 @@ import * as commander from "commander";
 import * as shelljs from "shelljs";
 import * as inquirer from "inquirer";
 
-type ProjectResponse = {
-  projectName: "produto" | "assistencia";
-};
-
-type EnvironmentResponse = { type: "dev" | "hml" };
-
 export class UltronTerminalExecutor {
-  private static INSTANCE: UltronTerminalExecutor;
+  static INSTANCE;
 
-  public static getInstance(
-    commandHandler: commander.Command,
-    shellExecutor: typeof shelljs,
-    terminalInputted: typeof inquirer
-  ) {
+  static getInstance(commandHandler, shellExecutor, terminalInputted) {
     if (!this.INSTANCE) {
       this.INSTANCE = new UltronTerminalExecutor(
         commandHandler,
@@ -26,15 +16,14 @@ export class UltronTerminalExecutor {
     return this.INSTANCE;
   }
 
-  constructor(
-    private commandHandler: commander.Command,
-    private shellExecutor: typeof shelljs,
-    private terminalInputted: typeof inquirer
-  ) {
+  constructor(commandHandler, shellExecutor, terminalInputted) {
+    this.commandHandler = commandHandler;
+    this.shellExecutor = shellExecutor;
+    this.terminalInputted = terminalInputted;
     this.initCli();
   }
 
-  private getEnvs() {
+  getEnvs() {
     return {
       produto: process.env.PROJECT_PRODUTO_PATH,
       assistencia: process.env.PROJECT_ASSISTENCIA_PATH,
@@ -42,9 +31,9 @@ export class UltronTerminalExecutor {
     };
   }
 
-  private async initCli() {
+  async initCli() {
     try {
-      const project: ProjectResponse = await this.terminalInputted.prompt([
+      const project = await this.terminalInputted.prompt([
         {
           type: "list",
           name: "projectName",
@@ -53,20 +42,18 @@ export class UltronTerminalExecutor {
         },
       ]);
 
-      const environment: EnvironmentResponse =
-        await this.terminalInputted.prompt([
-          {
-            type: "list",
-            name: "type",
-            message: "Selecione o ambiente",
-            choices: ["dev", "hml", "test"],
-          },
-        ]);
+      const environment = await this.terminalInputted.prompt([
+        {
+          type: "list",
+          name: "type",
+          message: "Selecione o ambiente",
+          choices: ["dev", "hml", "test"],
+        },
+      ]);
 
       const projectsPaths = this.getEnvs();
 
-      const currentProjectDirectory: string =
-        projectsPaths[project.projectName as any];
+      const currentProjectDirectory = projectsPaths[project.projectName] || "";
 
       const regex = /([d])\w+/g;
 
