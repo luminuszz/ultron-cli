@@ -1,13 +1,20 @@
 {
   "name": "ultron-cli",
-  "version": "1.5.15",
+  "version": "1.5.16",
   "main": "bin/index.js",
   "license": "MIT",
   "bin": {
     "ult": "bin/index.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">= 10.13.0",
+    "npm": ">= 6.11.0"
+  },
   "scripts": {
-    "dev": "node src/index.js"
+    "dev": "node bin/index.js"
   },
   "dependencies": {
     "commander": "^7.2.0",
