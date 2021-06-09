@@ -1,10 +1,10 @@
 {
   "name": "ultron-cli",
-  "version": "1.5.14",
-  "main": "src/index.js",
+  "version": "1.5.15",
+  "main": "bin/index.js",
   "license": "MIT",
   "bin": {
-    "ult": "src/index.js"
+    "ult": "bin/index.js"
   },
   "scripts": {
     "dev": "node src/index.js"
