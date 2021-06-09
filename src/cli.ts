@@ -2,19 +2,7 @@ import * as commander from "commander";
 import * as shelljs from "shelljs";
 import * as inquirer from "inquirer";
 
-const performanceFactory = {
-  startTime: 0,
-  endTime: 0,
-  start() {
-    this.startTime = performance.now();
-  },
 
-  end() {
-    this.endTime = performance.now();
-
-    return this.startTime - this.endTime;
-  },
-};
 
 export class UltronTerminalExecutor {
   private static INSTANCE: UltronTerminalExecutor;
