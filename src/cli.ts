@@ -68,6 +68,12 @@ export class UltronTerminalExecutor {
       const currentProjectDirectory: string =
         projectsPaths[project.projectName as any];
 
+      const regex = /([d])\w+/g;
+
+      this.shellExecutor.cd(currentProjectDirectory);
+
+      this.shellExecutor.exec(`sed -i -e '${regex}' ./.env`);
+
       this.shellExecutor.exec(`code ${currentProjectDirectory}`);
 
       this.shellExecutor.cd(projectsPaths.ultronMainProject);
