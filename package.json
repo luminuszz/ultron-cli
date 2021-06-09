@@ -1,6 +1,6 @@
 {
   "name": "ultron-cli",
-  "version": "1.2.0",
+  "version": "1.5.2",
   "main": "./out/index.js",
   "license": "MIT",
   "devDependencies": {
@@ -13,17 +13,10 @@
   "bin": {
     "ult": "out/index.js"
   },
-  "peerDependencies": {
-    "commander": "^7.2.0",
-    "inquirer": "^8.1.0",
-    "shelljs": "^0.8.4",
-    "typescript": "^4.3.2"
-  },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only  src/index.ts",
     "tsc": "./node_modules/typescript/bin/tsc",
-    "build": "tsc",
-    "postinstall": "build"
+    "publish": "tsc"
   },
   "dependencies": {
     "commander": "^7.2.0",

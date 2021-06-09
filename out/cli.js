@@ -37,17 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.UltronTerminalExecutor = void 0;
-var performanceFactory = {
-    startTime: 0,
-    endTime: 0,
-    start: function () {
-        this.startTime = performance.now();
-    },
-    end: function () {
-        this.endTime = performance.now();
-        return this.startTime - this.endTime;
-    }
-};
 var UltronTerminalExecutor = /** @class */ (function () {
     function UltronTerminalExecutor(commandHandler, shellExecutor, terminalInputted) {
         this.commandHandler = commandHandler;
