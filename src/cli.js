@@ -1,7 +1,3 @@
-const commander = require("commander");
-const shelljs = require("shelljs");
-const inquirer = require("inquirer");
-
 class UltronTerminalExecutor {
   static INSTANCE;
 
