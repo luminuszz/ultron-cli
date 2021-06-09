@@ -1,6 +1,6 @@
-import * as commander from "commander";
-import * as shelljs from "shelljs";
-import * as inquirer from "inquirer";
+const commander = require("commander");
+const shelljs = require("shelljs");
+const inquirer = require("inquirer");
 
 import { UltronTerminalExecutor } from "./cli";
 
