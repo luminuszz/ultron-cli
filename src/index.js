@@ -4,12 +4,6 @@ const inquirer = require("inquirer");
 
 const UltronTerminalExecutor = require("./cli");
 
-(() => {
-  const commanderInstance = new commander.Command();
+const commanderInstance = new commander.Command();
 
-  return UltronTerminalExecutor.getInstance(
-    commanderInstance,
-    shelljs,
-    inquirer
-  );
-})();
+UltronTerminalExecutor.getInstance(commanderInstance, shelljs, inquirer);
