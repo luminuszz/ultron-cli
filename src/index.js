@@ -2,7 +2,7 @@ const commander = require("commander");
 const shelljs = require("shelljs");
 const inquirer = require("inquirer");
 
-import { UltronTerminalExecutor } from "./cli";
+const UltronTerminalExecutor = require("./cli");
 
 (() => {
   const commanderInstance = new commander.Command();

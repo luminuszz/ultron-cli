@@ -1,8 +1,8 @@
-import * as commander from "commander";
-import * as shelljs from "shelljs";
-import * as inquirer from "inquirer";
+const commander = require("commander");
+const shelljs = require("shelljs");
+const inquirer = require("inquirer");
 
-export class UltronTerminalExecutor {
+class UltronTerminalExecutor {
   static INSTANCE;
 
   static getInstance(commandHandler, shellExecutor, terminalInputted) {
@@ -71,3 +71,5 @@ export class UltronTerminalExecutor {
     }
   }
 }
+
+module.exports = UltronTerminalExecutor;
