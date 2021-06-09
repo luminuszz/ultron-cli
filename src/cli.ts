@@ -2,7 +2,11 @@ import * as commander from "commander";
 import * as shelljs from "shelljs";
 import * as inquirer from "inquirer";
 
+type ProjectResponse = {
+  projectName: "produto" | "assistencia";
+};
 
+type EnvironmentResponse = { type: "dev" | "hml" };
 
 export class UltronTerminalExecutor {
   private static INSTANCE: UltronTerminalExecutor;
@@ -40,29 +44,35 @@ export class UltronTerminalExecutor {
 
   private async initCli() {
     try {
-      this.commandHandler.option("--e, --env envType", "environment", "red");
+      const project: ProjectResponse = await this.terminalInputted.prompt([
+        {
+          type: "list",
+          name: "projectName",
+          message: "selecione o projeto",
+          choices: ["produto", "assistencia"],
+        },
+      ]);
 
-      const project: { project: "produto" | "assistencia" } =
+      const environment: EnvironmentResponse =
         await this.terminalInputted.prompt([
           {
             type: "list",
-            name: "projectName",
-            message: "selecione o projeto",
-            choices: ["produto", "assistencia"],
+            name: "type",
+            message: "Selecione o ambiente",
+            choices: ["dev", "hml", "test"],
           },
         ]);
 
       const projectsPaths = this.getEnvs();
 
-      const currentProjectPath: string = projectsPaths[project as any];
+      const currentProjectDirectory: string =
+        projectsPaths[project.projectName as any];
 
-      this.shellExecutor.exec(`code ${currentProjectPath}`);
+      this.shellExecutor.exec(`code ${currentProjectDirectory}`);
 
       this.shellExecutor.cd(projectsPaths.ultronMainProject);
 
-      const flagOptions = this.commandHandler.opts();
-
-      this.shellExecutor.exec(`yarn start:${flagOptions.env}`);
+      this.shellExecutor.exec(`yarn start:${environment.type}`);
     } catch (error) {
       console.error(error);
     }
