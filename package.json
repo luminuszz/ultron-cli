@@ -1,6 +1,6 @@
 {
   "name": "ultron-cli",
-  "version": "1.5.11",
+  "version": "1.5.13",
   "main": "src/index.js",
   "license": "MIT",
   "devDependencies": {
