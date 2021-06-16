@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+
+      - uses: actions/checkout@v2.1.0
+
       - name: Setupt node
         uses: actions/setup-node@v2.1.5
         with: 
