@@ -27,6 +27,8 @@ jobs:
         
       - name: change_package_version
         run: npm version patch
+        env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           
       - name: publish
         run: npm publish
