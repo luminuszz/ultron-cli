@@ -20,8 +20,6 @@
   export PROJECT_ULTRON_MAIN_PATH=~/projects/brmf/ultron-login-frontend
 ```
 
-```
-
 - Create your environment variables in your project
 
 ![envs](./assets/envs.png)
@@ -34,4 +32,7 @@
 #### Use
 
 - use command `ult` in your terminal
+
+```
+
 ```
