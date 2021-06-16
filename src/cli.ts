@@ -9,6 +9,11 @@ type ShellInterfaceDTO<ChoiceKey extends string | number, ChoiceType> = Record<
   ChoiceType
 >;
 
+interface AnswersDTO {
+  projectName: string;
+  type: "dev" | "hml" | "test";
+}
+
 @injectable()
 export class UltronTerminalExecutor {
   constructor(
@@ -16,9 +21,7 @@ export class UltronTerminalExecutor {
     private shellExecutor: ShellManager,
     @inject(ShellInterfaceToken)
     private terminalInputted: ShellInterface
-  ) {
-    this.initCli();
-  }
+  ) {}
 
   private commands = {
     dev: "cp ./.env.dev.local .env ",
@@ -34,43 +37,37 @@ export class UltronTerminalExecutor {
     };
   }
 
-  async initCli() {
+  public async initCli() {
     try {
-      const project: ShellInterfaceDTO<
-        "projectName",
-        "produto" | "assistencia"
-      > = await this.terminalInputted.interface.prompt([
+      console.log("foi chamada");
+      const answers: AnswersDTO = await this.terminalInputted.interface.prompt([
         {
           type: "list",
           name: "projectName",
           message: "selecione o projeto",
           choices: ["produto", "assistencia"],
         },
+        {
+          type: "list",
+          name: "type",
+          message: "Selecione o ambiente",
+          choices: ["dev", "hml", "test"],
+        },
       ]);
-
-      const environment: ShellInterfaceDTO<"type", "dev" | "hml" | "test"> =
-        await this.terminalInputted.interface.prompt([
-          {
-            type: "list",
-            name: "type",
-            message: "Selecione o ambiente",
-            choices: ["dev", "hml", "test"],
-          },
-        ]);
 
       const projectsPaths = this.getEnvs() as Record<string, string>;
 
-      const currentProjectDirectory = projectsPaths[project.projectName];
+      const currentProjectDirectory = projectsPaths[answers.projectName];
 
       this.shellExecutor.manager.cd(currentProjectDirectory);
 
-      this.shellExecutor.manager.exec(this.commands[environment.type]);
+      this.shellExecutor.manager.exec(this.commands[answers.type]);
 
       this.shellExecutor.manager.exec(`code ${currentProjectDirectory}`);
 
       this.shellExecutor.manager.cd(projectsPaths.ultronMainProject);
 
-      this.shellExecutor.manager.exec(`yarn start:${environment.type}`);
+      this.shellExecutor.manager.exec(`yarn start:${answers.type}`);
     } catch (error) {
       console.error(error);
     }

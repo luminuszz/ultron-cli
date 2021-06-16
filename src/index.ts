@@ -2,9 +2,9 @@
 
 import "reflect-metadata";
 
-import { container } from "tsyringe";
-
 import "./container/index";
+
+import { container } from "tsyringe";
 
 import { UltronTerminalExecutor } from "./cli";
 
