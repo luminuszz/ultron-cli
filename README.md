@@ -7,9 +7,9 @@
 ### install
 
 ```bash
-   npm i -g ultron-cli
-   or
-   yarn global add ultron-cli
+ npm i -g ultron-cli
+ or
+ yarn global add ultron-cli
 ```
 
 `
