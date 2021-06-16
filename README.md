@@ -1,4 +1,6 @@
-# Ultron CLI
+# Ultron-CLI
+
+![alt](./assets/ultron.jpeg)
 
 ## Simple cli for manager Ultron Project
 
