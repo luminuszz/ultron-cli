@@ -8,8 +8,10 @@ import "./container/index";
 
 import { UltronTerminalExecutor } from "./cli";
 
-(() => {
+const execute = async () => {
   const ultronCLIInstance = container.resolve(UltronTerminalExecutor);
 
-  ultronCLIInstance.initCli();
-})();
+  await ultronCLIInstance.initCli();
+};
+
+execute();

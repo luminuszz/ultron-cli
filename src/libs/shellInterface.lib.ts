@@ -1,10 +1,10 @@
-import * as inquirer from "inquirer";
+import * as inquirerFactory from "inquirer";
 
 export class ShellInterface {
-  public interface: typeof inquirer;
+  public interface: inquirerFactory.Inquirer;
 
   constructor() {
-    this.interface = inquirer;
+    this.interface = inquirerFactory;
   }
 }
 

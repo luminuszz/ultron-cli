@@ -24,3 +24,7 @@
   your env files need to following nomenclature `.env.{env type}}.local`
 
   ex: `.env.dev.local`
+
+#### Use
+
+- use command `ult` in your terminal
