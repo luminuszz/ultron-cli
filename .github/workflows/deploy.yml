@@ -1,0 +1,35 @@
+name: "Deploy"
+
+on: 
+  push:
+    branches: [master]
+    
+
+jobs:
+  build: 
+    runs-on: ubuntu-lastest
+    
+    steps:
+      - name: Setupt node
+        uses: actions/setup-node@v2.1.5
+        with: 
+          node-version: 15.x
+          
+      - name: build
+        run: npm run build
+        
+      - name: change package version
+        run: npm version patch
+          
+      - name: publish
+        run: npm publish
+      
+      
+    
+    
+
+    
+  
+
+
+  
