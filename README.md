@@ -6,9 +6,13 @@
 
 ### install
 
-- ```console
-  npm i ultron-cli
-  ```
+```bash
+   npm i -g ultron-cli
+   or
+   yarn global add ultron-cli
+```
+
+`
 
 - configure your projects paths env
 
@@ -17,6 +21,8 @@
   export PROJECT_ASSISTENCIA_PATH=~/projects/brmf/assistencia-frontend
   export PROJECT_ULTRON_MAIN_PATH=~/projects/brmf/ultron-login-frontend
   ```
+
+```
 
 - Create your environment variables in your project
 
@@ -30,3 +36,4 @@
 #### Use
 
 - use command `ult` in your terminal
+```
