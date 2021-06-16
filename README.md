@@ -12,8 +12,6 @@
  yarn global add ultron-cli
 ```
 
-`
-
 - configure your projects paths env
 
   ```console
