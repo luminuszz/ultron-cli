@@ -11,16 +11,16 @@
 - configure your projects paths env
 
 ```console
-    export PROJECT_PRODUTO_PATH=~/projects/brmf/produto-frontend
-    export PROJECT_ASSISTENCIA_PATH=~/projects/brmf/assistencia-frontend
-    export PROJECT_ULTRON_MAIN_PATH=~/projects/brmf/ultron-login-frontend
+export PROJECT_PRODUTO_PATH=~/projects/brmf/produto-frontend
+export PROJECT_ASSISTENCIA_PATH=~/projects/brmf/assistencia-frontend
+export PROJECT_ULTRON_MAIN_PATH=~/projects/brmf/ultron-login-frontend
 ```
 
 - Create your environment variables in your project
 
 ![envs](./assets/envs.png)
 
-- **importante !**
+- **important !**
   your env files need to following nomenclature `.env.{env type}}.local`
 
   ex: `.env.dev.local`
