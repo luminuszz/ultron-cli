@@ -14,11 +14,11 @@
 
 - configure your projects paths env
 
-  ```console
+```console
   export PROJECT_PRODUTO_PATH=~/projects/brmf/produto-frontend
   export PROJECT_ASSISTENCIA_PATH=~/projects/brmf/assistencia-frontend
   export PROJECT_ULTRON_MAIN_PATH=~/projects/brmf/ultron-login-frontend
-  ```
+```
 
 ```
 
