@@ -14,9 +14,12 @@ jobs:
         uses: actions/setup-node@v2.1.5
         with: 
           node-version: 15.x
-          
+
+      - name: install dependencies
+        run: yarn    
+      
       - name: build
-        run: npm run build
+        run: yarn build
         
       - name: change package version
         run: npm version patch
