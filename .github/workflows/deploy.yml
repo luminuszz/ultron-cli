@@ -17,6 +17,7 @@ jobs:
         uses: actions/setup-node@v2.1.5
         with: 
           node-version: 15.x
+          registry-url: 'https://registry.npmjs.org'
 
       - name: install dependencies
         run: yarn    
@@ -29,6 +30,8 @@ jobs:
           
       - name: publish
         run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       
       
     
