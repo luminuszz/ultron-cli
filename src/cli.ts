@@ -69,7 +69,11 @@ export class UltronTerminalExecutor {
 
       const currentProjectDirectory = projectsPaths[answers.projectName];
 
+
       this.shellExecutor.manager.cd(currentProjectDirectory);
+
+      this.shellExecutor.manager.exec('pwd')
+
 
       this.shellExecutor.manager.exec(this.commands[answers.type]);
 
@@ -78,24 +82,27 @@ export class UltronTerminalExecutor {
       if (answers.branch) {
         const envBranches = this.envBranches;
 
-        this.shellExecutor.manager.exec(
-          `git fetch origin ${this.envBranches[
+        const { branch } = answers
+
+        const selectedBranchRootBranch = this.envBranches[
           (answers.type as keyof typeof envBranches) || "dev"
-          ]
-          } ${answers.branch}`
-        );
+        ]
 
-        this.shellExecutor.manager.exec(`git switch ${answers.branch}`);
+        this.shellExecutor.manager.exec(`git fetch origin ${selectedBranchRootBranch}:${branch}`)
 
-        this.shellExecutor.manager.exec(
-          ` git push --set-upstream origin ${answers.branch}`
-        );
+
+
+
+        this.shellExecutor.manager.exec(`git switch ${branch}`);
+
       }
+
 
       this.shellExecutor.manager.cd(projectsPaths.ultronMainProject);
 
       this.shellExecutor.manager.exec(`yarn start:${answers.type}`);
     } catch (error) {
+      process.exit()
       console.error(error);
     }
   }
