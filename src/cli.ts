@@ -88,7 +88,7 @@ export class UltronTerminalExecutor {
         this.shellExecutor.manager.exec(`git switch ${answers.branch}`);
 
         this.shellExecutor.manager.exec(
-          `git branch --set-upstream-to ${answers.branch} origin/${answers.branch}`
+          ` git push --set-upstream origin ${answers.branch}`
         );
       }
 
