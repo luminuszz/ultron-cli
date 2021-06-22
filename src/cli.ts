@@ -12,6 +12,7 @@ type ShellInterfaceDTO<ChoiceKey extends string | number, ChoiceType> = Record<
 interface AnswersDTO {
   projectName: string;
   type: "dev" | "hml" | "test";
+  branch?: string;
 }
 
 @injectable()
@@ -21,12 +22,17 @@ export class UltronTerminalExecutor {
     private shellExecutor: ShellManager,
     @inject(ShellInterfaceToken)
     private terminalInputted: ShellInterface
-  ) {}
+  ) { }
 
   private commands = {
     dev: "cp ./.env.dev.local .env ",
     hml: "cp ./.env.hml.local .env ",
     test: "cp ./.env.test.local .env ",
+  };
+
+  private envBranches = {
+    hml: "release",
+    dev: "develop",
   };
 
   private getEnvs() {
@@ -39,7 +45,6 @@ export class UltronTerminalExecutor {
 
   public async initCli() {
     try {
-      console.log("foi chamada");
       const answers: AnswersDTO = await this.terminalInputted.interface.prompt([
         {
           type: "list",
@@ -53,6 +58,11 @@ export class UltronTerminalExecutor {
           message: "Selecione o ambiente",
           choices: ["dev", "hml", "test"],
         },
+        {
+          type: "input",
+          name: "branch",
+          message: "Clone Root Branch for other branch ?",
+        },
       ]);
 
       const projectsPaths = this.getEnvs() as Record<string, string>;
@@ -64,6 +74,23 @@ export class UltronTerminalExecutor {
       this.shellExecutor.manager.exec(this.commands[answers.type]);
 
       this.shellExecutor.manager.exec(`code ${currentProjectDirectory}`);
+
+      if (answers.branch) {
+        const envBranches = this.envBranches;
+
+        this.shellExecutor.manager.exec(
+          `git fetch origin ${this.envBranches[
+          (answers.type as keyof typeof envBranches) || "dev"
+          ]
+          } ${answers.branch}`
+        );
+
+        this.shellExecutor.manager.exec(`git switch ${answers.branch}`);
+
+        this.shellExecutor.manager.exec(
+          `git branch --set-upstream-to ${answers.branch} origin/${answers.branch}`
+        );
+      }
 
       this.shellExecutor.manager.cd(projectsPaths.ultronMainProject);
 

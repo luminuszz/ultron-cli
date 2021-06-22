@@ -32,7 +32,3 @@
 #### Use
 
 - use command `ult` in your terminal
-
-```
-
-```
