@@ -4,11 +4,6 @@ import { ShellManagerToken, ShellManager } from './libs/shellManager.lib';
 
 import { normalize } from 'path';
 
-type ShellInterfaceDTO<ChoiceKey extends string | number, ChoiceType> = Record<
-  ChoiceKey,
-  ChoiceType
->;
-
 interface AnswersDTO {
   projectName: string;
   type: 'dev' | 'hml' | 'test';
@@ -36,11 +31,12 @@ export class UltronTerminalExecutor {
     dev: 'develop',
   };
 
-  private getEnvs() {
+  private static getEnvs(): Record<string, any> {
     return {
       produto: normalize(process.env.PROJECT_PRODUTO_PATH || ''),
       assistencia: normalize(process.env.PROJECT_ASSISTENCIA_PATH || ''),
       ultronMainProject: normalize(process.env.PROJECT_ULTRON_MAIN_PATH || ''),
+      openVscode: process.env.OPEN_VSCODE || false,
     };
   }
 
@@ -66,17 +62,19 @@ export class UltronTerminalExecutor {
         },
       ]);
 
-      const projectsPaths = this.getEnvs() as Record<string, string>;
+      const { openVscode, ...projectsPaths } = UltronTerminalExecutor.getEnvs();
 
       const currentProjectDirectory = projectsPaths[answers.projectName];
 
-      this.shellExecutor.manager.cd(currentProjectDirectory);
+      this.shellExecutor.manager.cd(currentProjectDirectory as string);
 
       this.shellExecutor.manager.exec('pwd');
 
       this.shellExecutor.manager.exec(this.commands[answers.type]);
 
-      this.shellExecutor.manager.exec(`code ${currentProjectDirectory}`);
+      if (openVscode) {
+        this.shellExecutor.manager.exec(`code ${currentProjectDirectory}`);
+      }
 
       if (answers.branch) {
         const envBranches = this.envBranches;
