@@ -1,4 +1,4 @@
-# Ultron-CLI
+# Ultron CLI
 
 ![alt](./assets/ultron.jpeg)
 
