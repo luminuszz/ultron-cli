@@ -76,7 +76,7 @@ export class UltronTerminalExecutor {
         openVscode,
       });
 
-      if (openVscode) {
+      if (!!openVscode) {
         this.shellExecutor.manager.exec(`code ${currentProjectDirectory}`);
       }
 
