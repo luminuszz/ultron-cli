@@ -1,4 +1,4 @@
-# Ultron-CLI
+# Ultron CLI
 
 ![alt](./assets/ultron.jpeg)
 
@@ -14,10 +14,11 @@
 
 - configure your projects paths env
 
-```console
+```bash
   export PROJECT_PRODUTO_PATH=~/projects/brmf/produto-frontend
   export PROJECT_ASSISTENCIA_PATH=~/projects/brmf/assistencia-frontend
   export PROJECT_ULTRON_MAIN_PATH=~/projects/brmf/ultron-login-frontend
+  export OPEN_VSCODE=false
 ```
 
 - Create your environment variables in your project
