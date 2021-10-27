@@ -36,7 +36,7 @@ export class UltronTerminalExecutor {
       produto: normalize(process.env.PROJECT_PRODUTO_PATH || ''),
       assistencia: normalize(process.env.PROJECT_ASSISTENCIA_PATH || ''),
       ultronMainProject: normalize(process.env.PROJECT_ULTRON_MAIN_PATH || ''),
-      openVscode: process.env.OPEN_VSCODE || false,
+      openVscode: Number(process.env.OPEN_VSCODE) || 0,
     };
   }
 
@@ -71,6 +71,10 @@ export class UltronTerminalExecutor {
       this.shellExecutor.manager.exec('pwd');
 
       this.shellExecutor.manager.exec(this.commands[answers.type]);
+
+      console.log({
+        openVscode,
+      });
 
       if (openVscode) {
         this.shellExecutor.manager.exec(`code ${currentProjectDirectory}`);
